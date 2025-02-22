@@ -45,7 +45,7 @@ export class UserRegistrationFormComponent {
     this.errorMessage.set('');
     this.successMessage.set('');
 
-    let { firstName, lastName, username, email, password } = this.userForm.value;
+    const { firstName, lastName, username, email, password } = this.userForm.value;
 
     this.userService.registerUser({ firstName, lastName, username, email, password }).subscribe({
       next: () => {
