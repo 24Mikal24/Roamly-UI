@@ -49,17 +49,13 @@ describe('UserRegistrationFormComponent', () => {
       confirmPassword: 'password123'
     });
 
-    component.updatePasswordsMatch();
-
-    expect(component.passwordsMatch()).toBeTrue();
+    expect(component.userForm.hasError('passwordsMismatch')).toBeFalse();
 
     component.userForm.patchValue({
       confirmPassword: 'password1234'
     });
 
-    component.updatePasswordsMatch();
-
-    expect(component.passwordsMatch()).toBeFalse();
+    expect(component.userForm.hasError('passwordsMismatch')).toBeTrue();
   });
 
   it('should call userService.registerUser() with form data on valid submission', () => {
@@ -74,7 +70,6 @@ describe('UserRegistrationFormComponent', () => {
       confirmPassword: 'password123'
     });
 
-    component.updatePasswordsMatch();
     component.registerUser();
 
     expect(userServiceMock.registerUser).toHaveBeenCalledWith({
@@ -100,7 +95,6 @@ describe('UserRegistrationFormComponent', () => {
       confirmPassword: 'password123'
     });
 
-    component.updatePasswordsMatch();
     component.registerUser();
 
     expect(component.errorMessage()).toBe('Registration failed');
