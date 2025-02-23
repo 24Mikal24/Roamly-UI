@@ -26,14 +26,21 @@ export class UserRegistrationFormComponent {
   });
 
   isSubmitting: WritableSignal<boolean> = signal(false);
+  passwordsMatch: WritableSignal<boolean> = signal(false);
   successMessage: WritableSignal<string> = signal('');
   errorMessage: WritableSignal<string> = signal('');
 
-  passwordsMatch: Signal<boolean> = computed(() => {
-    return this.userForm.get('password')?.value === this.userForm.get('confirmPassword')?.value;
-  });
+  updatePasswordsMatch() {
+    this.passwordsMatch.update(() => 
+      this.userForm.get('password')?.value === this.userForm.get('confirmPassword')?.value
+    );
 
-  registerUser(): void {
+    if (!this.passwordsMatch()) {
+      this.errorMessage.set('Passwords do not match.')
+    }
+  }
+
+  registerUser() {
     if (this.userForm.invalid) return;
 
     if (!this.passwordsMatch()) {

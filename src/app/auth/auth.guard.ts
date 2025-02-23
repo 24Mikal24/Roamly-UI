@@ -9,6 +9,7 @@ export const authGuard: CanActivateFn = () => {
 
   if (!isLoggedIn) {
     authService.login();
+    return false;
   }
 
   return true;

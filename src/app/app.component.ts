@@ -27,8 +27,4 @@ export class AppComponent implements OnInit {
   logout() {
     this.authService.logout(environment.postLogoutRedirectUri);
   }
-
-  login() {
-    this.authService.login();
-  }
 }

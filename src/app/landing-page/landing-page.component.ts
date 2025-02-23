@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserRegistrationFormComponent } from "../../users/user-registration-form/user-registration-form.component";
+import { UserRegistrationFormComponent } from "../users/user-registration-form/user-registration-form.component";
 
 @Component({
   selector: 'app-landing-page',

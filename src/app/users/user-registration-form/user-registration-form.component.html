@@ -32,7 +32,7 @@
   
       <div class="form-group">
         <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" formControlName="confirmPassword" placeholder="Confirm password">
+        <input type="password" formControlName="confirmPassword" placeholder="Confirm password" (change)="updatePasswordsMatch()">
         <small *ngIf="!passwordsMatch() && userForm.get('confirmPassword')?.touched">
           Passwords do not match.
         </small>
