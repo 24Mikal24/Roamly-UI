@@ -52,19 +52,15 @@ describe('UserRegistrationFormComponent', () => {
     component.updatePasswordsMatch();
 
     expect(component.passwordsMatch()).toBeTrue();
-  });
 
-  it('should display an error if password and confirmPassword do not match', () => {
     component.userForm.patchValue({
-      password: 'password123',
       confirmPassword: 'password1234'
     });
 
     component.updatePasswordsMatch();
 
-    expect(component.passwordsMatch()).toBe(false);
-    expect(component.errorMessage()).toBe('Passwords do not match.');
-  })
+    expect(component.passwordsMatch()).toBeFalse();
+  });
 
   it('should call userService.registerUser() with form data on valid submission', () => {
     userServiceMock.registerUser.and.returnValue(of({ message: 'Success' }));

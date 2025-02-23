@@ -34,19 +34,10 @@ export class UserRegistrationFormComponent {
     this.passwordsMatch.update(() => 
       this.userForm.get('password')?.value === this.userForm.get('confirmPassword')?.value
     );
-
-    if (!this.passwordsMatch()) {
-      this.errorMessage.set('Passwords do not match.')
-    }
   }
 
   registerUser() {
     if (this.userForm.invalid) return;
-
-    if (!this.passwordsMatch()) {
-      this.errorMessage.set('Passwords do not match.');
-      return;
-    }
 
     this.isSubmitting.set(true);
     this.errorMessage.set('');
