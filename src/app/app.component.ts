@@ -13,10 +13,10 @@ import { environment } from '../environments/environment';
 })
 export class AppComponent implements OnInit {
   
-  private authService = inject(KeycloakService);
+  private keycloakService = inject(KeycloakService);
   private router = inject(Router);
 
-  isLoggedIn = this.authService.isLoggedIn();
+  isLoggedIn = this.keycloakService.isLoggedIn();
 
   ngOnInit() {
     if (this.isLoggedIn) {
@@ -25,6 +25,6 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout(environment.postLogoutRedirectUri);
+    this.keycloakService.logout(environment.postLogoutRedirectUri);
   }
 }
