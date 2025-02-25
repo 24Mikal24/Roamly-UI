@@ -13,18 +13,18 @@ import { ItineraryFormComponent } from "./itinerary-form/itinerary-form.componen
   styleUrls: ['./itineraries.component.scss']
 })
 export class ItinerariesComponent implements OnInit {
-  itineraries: Itinerary[] = [];
-
   private itineraryService = inject(ItineraryService);
   private router = inject(Router);
+
+  itineraries = this.itineraryService.getRecords();
+
 
   ngOnInit() {
     this.loadItineraries();
   }
 
   private loadItineraries(): void {
-    this.itineraryService.getUserItineraries().subscribe({
-      next: (data) => this.itineraries = data,
+    this.itineraryService.getItineraries().subscribe({
       error: (err) => console.error('Failed to load itineraries:', err)
     });
   }

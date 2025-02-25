@@ -1,35 +1,37 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { finalize, Observable } from 'rxjs';
 import { Itinerary } from '../model/itinerary';
 import { environment } from '../../../../environments/environment';
-import { AuthService } from '../../../auth/shared/service/auth.service';
 import { CreateItineraryRequest } from '../model/create-itinerary-request';
+import { SmartService } from '../../../core/service/smart-service';
+import { HttpService } from '../../../core/service/http-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ItineraryService {
+export class ItineraryService extends SmartService<Itinerary> {
 
-  private http = inject(HttpClient);
-  private authService = inject(AuthService);
+  protected override getId(record: Itinerary) {
+      return record.id;
+  }
+
+  protected override http: HttpService = inject(HttpService);
 
   private baseUrl = `${environment.apiUrl}/itineraries`;
 
   createItinerary(request: CreateItineraryRequest) {
-    return this.http.post<Itinerary>(`${this.baseUrl}`, request);
+    return this.create(this.baseUrl, request);
   }
 
-  getUserItineraries(): Observable<Itinerary[]> {
-    const userId = this.authService.getUserId();
-    return this.http.get<Itinerary[]>(`${this.baseUrl}/${userId}`);
+  getItineraries(): Observable<Itinerary[]> {
+    return this.fetchAll(this.baseUrl);
   }
 
   updateItinerary(itinerary: Itinerary): Observable<Itinerary> {
-    return this.http.put<Itinerary>(`${this.baseUrl}/${itinerary.id}`, itinerary);
+    return this.update(`${this.baseUrl}/${itinerary.id}`, itinerary.id, itinerary);
   }
 
   deleteItinerary(itineraryId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${itineraryId}`);
+    return this.delete(`${this.baseUrl}/${itineraryId}`, itineraryId);
   }
 }
