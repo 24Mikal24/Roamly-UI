@@ -1,0 +1,13 @@
+<header>
+    @if (!isNavbarOpen()) {
+        <button class="hamburger" (click)="toggleNavbar()">☰</button>
+    }
+  
+    <nav [class.open]="isNavbarOpen()">
+      <button class="close-btn" (click)="toggleNavbar()">✖</button>
+      <a routerLink="/home" (click)="toggleNavbar()">Home</a>
+      @if (isLoggedIn()) {
+        <a (click)="logout(); toggleNavbar()">Logout</a>
+      }
+    </nav>
+</header>

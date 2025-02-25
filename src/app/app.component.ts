@@ -2,14 +2,14 @@ import { Component, inject, OnInit } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
-import { environment } from '../environments/environment';
+import { NavbarComponent } from "./navbar/navbar.component";
 
 @Component({
   standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [NgIf, RouterOutlet]
+  imports: [NgIf, RouterOutlet, NavbarComponent]
 })
 export class AppComponent implements OnInit {
   
@@ -22,9 +22,5 @@ export class AppComponent implements OnInit {
     if (this.isLoggedIn) {
       this.router.navigate(['/home']);
     }
-  }
-
-  logout() {
-    this.keycloakService.logout(environment.postLogoutRedirectUri);
   }
 }
