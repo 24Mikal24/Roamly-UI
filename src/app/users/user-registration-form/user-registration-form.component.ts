@@ -14,7 +14,7 @@ import { KeycloakService } from 'keycloak-angular';
 export class UserRegistrationFormComponent {
   private fb = inject(FormBuilder);
   private userService = inject(UserService);
-  private authService = inject(KeycloakService);
+  private keycloakService = inject(KeycloakService);
 
   private passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const password = control.get('password')?.value;
@@ -62,6 +62,6 @@ export class UserRegistrationFormComponent {
   }
 
   login() {
-    this.authService.login();
+    this.keycloakService.login();
   }
 }

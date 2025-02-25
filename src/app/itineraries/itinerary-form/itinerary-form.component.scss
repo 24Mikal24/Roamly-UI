@@ -1,0 +1,66 @@
+.itinerary-card {
+    width: 250px;
+    height: 200px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+  }
+  
+  .plus-button {
+    font-size: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+  }
+  
+  form {
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  input, textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  button.cancel {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  button[type="submit"] {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .itinerary-card.expanded {
+    height: auto;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 15px;
+  }

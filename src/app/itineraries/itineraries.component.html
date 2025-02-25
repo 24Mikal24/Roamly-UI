@@ -1,0 +1,23 @@
+<div class="itineraries-container">
+    <h2>Itineraries</h2>
+  
+    <div class="itinerary-grid">
+      <app-itinerary-form></app-itinerary-form>
+      @if (itineraries().length) {
+        <ng-container>
+          @for (itinerary of itineraries(); track itinerary.id) {
+            <div class="itinerary-card">
+              <h3>{{ itinerary.title }}</h3>
+              <p><strong>Destination:</strong> {{ itinerary.destination }}</p>
+              <p>{{ itinerary.description }}</p>
+              <button (click)="viewItinerary(itinerary.id)">View</button>
+              <button (click)="deleteItinerary(itinerary.id)">Delete</button>
+            </div>
+          }
+        </ng-container>
+      } @else { 
+        <p>You haven't created any itineraries yet.</p>
+       }
+
+    </div>
+</div>
