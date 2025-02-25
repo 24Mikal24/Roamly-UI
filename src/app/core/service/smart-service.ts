@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpService } from './http-service';
@@ -8,7 +8,8 @@ import { HttpService } from './http-service';
 })
 export abstract class SmartService<T> {
   protected records = signal<T[]>([]);
-  protected abstract readonly http: HttpService;
+  
+  private http = inject(HttpService);
 
   getRecords() {
     return this.records;
