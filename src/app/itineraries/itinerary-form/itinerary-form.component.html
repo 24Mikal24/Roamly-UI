@@ -1,16 +1,20 @@
 <div class="itinerary-card" [class.expanded]="isFormVisible()">
-    <button *ngIf="!isFormVisible()" class="plus-button" (click)="showForm()">
-      +
-    </button>
-  
-    <form *ngIf="isFormVisible()" [formGroup]="itineraryForm" (ngSubmit)="createItinerary()">
-      <input formControlName="title" type="text" placeholder="Title" required />
-      <input formControlName="destination" type="text" placeholder="Destination" required />
-      <textarea formControlName="description" placeholder="Description (max 255 characters)"></textarea>
-  
-      <div class="button-group">
-        <button type="submit" [disabled]="itineraryForm.invalid">Create</button>
-        <button type="button" class="cancel" (click)="hideForm()">Cancel</button>
-      </div>
-    </form>
+    @if (!isFormVisible()) {
+      <button class="plus-button" (click)="showForm()">
+        +
+      </button>
+    }
+    
+    @if (isFormVisible()) {
+      <form [formGroup]="itineraryForm" (ngSubmit)="createItinerary()">
+        <input formControlName="title" type="text" placeholder="Title" required />
+        <input formControlName="destination" type="text" placeholder="Destination" required />
+        <textarea formControlName="description" placeholder="Description (max 255 characters)"></textarea>
+    
+        <div class="button-group">
+          <button type="submit" [disabled]="itineraryForm.invalid">Create</button>
+          <button type="button" class="cancel" (click)="hideForm()">Cancel</button>
+        </div>
+      </form>
+    }
 </div>

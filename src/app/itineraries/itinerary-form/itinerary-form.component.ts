@@ -1,13 +1,12 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ItineraryService } from '../shared/service/itinerary.service';
-import { NgIf } from '@angular/common';
 import { CreateItineraryRequest } from '../shared/model/create-itinerary-request';
 
 @Component({
   selector: 'app-itinerary-form',
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './itinerary-form.component.html',
   styleUrls: ['./itinerary-form.component.scss']
 })

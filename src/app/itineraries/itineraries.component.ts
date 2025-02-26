@@ -1,13 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgFor, NgIf } from '@angular/common';
-import { Itinerary } from './shared/model/itinerary';
 import { ItineraryService } from './shared/service/itinerary.service';
 import { ItineraryFormComponent } from "./itinerary-form/itinerary-form.component";
 
 @Component({
   standalone: true,
-  imports: [NgIf, NgFor, ItineraryFormComponent],
+  imports: [ItineraryFormComponent],
   selector: 'app-itineraries',
   templateUrl: './itineraries.component.html',
   styleUrls: ['./itineraries.component.scss']

@@ -1,5 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { NgIf } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { NavbarComponent } from "./navbar/navbar.component";
@@ -9,7 +8,7 @@ import { NavbarComponent } from "./navbar/navbar.component";
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [NgIf, RouterOutlet, NavbarComponent]
+  imports: [RouterOutlet, NavbarComponent]
 })
 export class AppComponent implements OnInit {
   

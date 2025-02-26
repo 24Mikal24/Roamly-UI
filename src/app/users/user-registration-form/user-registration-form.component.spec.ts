@@ -1,33 +1,23 @@
 import { TestBed } from '@angular/core/testing';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { UserRegistrationFormComponent } from './user-registration-form.component';
 import { UserService } from '../shared/service/user.service';
 import { KeycloakService } from 'keycloak-angular';
 import { of, throwError } from 'rxjs';
-import { provideHttpClient } from '@angular/common/http';
 
 describe('UserRegistrationFormComponent', () => {
   let component: UserRegistrationFormComponent;
-  let userServiceMock: jasmine.SpyObj<UserService>;
-  let authServiceMock: jasmine.SpyObj<KeycloakService>;
+  const userServiceMock = jasmine.createSpyObj<UserService>('UserService', ['registerUser']);
+  const authServiceMock = jasmine.createSpyObj<KeycloakService>('KeycloakService', ['login']);
 
   beforeEach(() => {
-    userServiceMock = jasmine.createSpyObj<UserService>('UserService', ['registerUser']);
-    authServiceMock = jasmine.createSpyObj<KeycloakService>('KeycloakService', ['login']);
-
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule],
       providers: [
         { provide: UserService, useValue: userServiceMock },
-        { provide: KeycloakService, useValue: authServiceMock },
-        FormBuilder,
-        provideHttpClient()
+        { provide: KeycloakService, useValue: authServiceMock }
       ]
     });
 
-    const fixture = TestBed.createComponent(UserRegistrationFormComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = TestBed.createComponent(UserRegistrationFormComponent).componentInstance;
   });
 
   it('should initialize the form with empty values', () => {

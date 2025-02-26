@@ -1,13 +1,12 @@
-import { Component, inject, Signal, WritableSignal, computed, signal } from '@angular/core';
+import { Component, inject, WritableSignal, signal } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { UserService } from '../shared/service/user.service';
-import { NgIf } from '@angular/common';
 import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-user-registration-form',
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './user-registration-form.component.html',
   styleUrls: ['./user-registration-form.component.scss']
 })

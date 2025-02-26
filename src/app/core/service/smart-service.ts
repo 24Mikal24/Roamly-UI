@@ -32,7 +32,7 @@ export abstract class SmartService<T> {
   }
 
   update(endpoint: string, id: any, payload: any): Observable<T> {
-    return this.http.put<T>(`${endpoint}/${id}`, payload).pipe(
+    return this.http.put<T>(`${endpoint}`, payload).pipe(
       tap(updated => this.records.update(records => records.map(record => this.getId(record) === id ? updated : record)))
     );
   }

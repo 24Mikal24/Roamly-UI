@@ -4,13 +4,11 @@ import { KeycloakService } from 'keycloak-angular';
 import { authGuard } from './auth.guard';
 
 describe('authGuard', () => {
-  let keycloakServiceMock: jasmine.SpyObj<KeycloakService>;
   let mockRoute: ActivatedRouteSnapshot;
   let mockState: RouterStateSnapshot;
+  const keycloakServiceMock = jasmine.createSpyObj<KeycloakService>('KeycloakService', ['isLoggedIn', 'login']);
 
   beforeEach(() => {
-    keycloakServiceMock = jasmine.createSpyObj<KeycloakService>('KeycloakService', ['isLoggedIn', 'login']);
-
     TestBed.configureTestingModule({
       providers: [
         { provide: KeycloakService, useValue: keycloakServiceMock },

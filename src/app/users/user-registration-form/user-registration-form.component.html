@@ -20,9 +20,11 @@
       <div class="form-group">
         <label for="email">Email:</label>
         <input type="email" formControlName="email" placeholder="Email">
-        <small *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.dirty" class="error">
-          Enter a valid email.
-        </small>
+        @if (userForm.get('email')?.invalid && userForm.get('email')?.dirty) {
+          <small class="error">
+            Enter a valid email.
+          </small>
+        }
       </div>
   
       <div class="form-group">
@@ -33,9 +35,11 @@
       <div class="form-group">
         <label for="confirmPassword">Confirm Password:</label>
         <input type="password" formControlName="confirmPassword" placeholder="Confirm password">
-        <div *ngIf="userForm.hasError('passwordsMismatch') && userForm.get('confirmPassword')?.dirty" class="error">
-          Passwords do not match.
-        </div>
+        @if (userForm.hasError('passwordsMismatch') && userForm.get('confirmPassword')?.dirty) {
+          <div class="error">
+            Passwords do not match.
+          </div>
+        }
       </div>
   
       <button type="submit" [disabled]="isSubmitting() || userForm.invalid">Register</button>

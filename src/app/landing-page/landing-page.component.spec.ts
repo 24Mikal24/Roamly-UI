@@ -1,14 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
 import { LandingPageComponent } from './landing-page.component';
 import { KeycloakService } from 'keycloak-angular';
-import { provideHttpClient } from '@angular/common/http';
 
 describe('LandingPageComponent', () => {
-  let keycloakServiceMock: jasmine.SpyObj<KeycloakService>;
+  const keycloakServiceMock = jasmine.createSpyObj<KeycloakService>('KeycloakService', ['isLoggedIn', 'login']);
 
   beforeEach(() => {
-    keycloakServiceMock = jasmine.createSpyObj<KeycloakService>('KeycloakService', ['isLoggedIn', 'login']);
-
     TestBed.configureTestingModule({
       providers: [
         { provide: KeycloakService, useValue: keycloakServiceMock },

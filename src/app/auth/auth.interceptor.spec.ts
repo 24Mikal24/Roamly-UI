@@ -1,18 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClient } from '@angular/common/http';
 import { KeycloakService } from 'keycloak-angular';
 import { authInterceptor } from './auth.interceptor';
-import { HttpClient } from '@angular/common/http';
 
 describe('AuthInterceptor', () => {
   let httpClient: HttpClient;
   let httpMock: HttpTestingController;
-  let keycloakServiceMock: jasmine.SpyObj<KeycloakService>;
+  const keycloakServiceMock = jasmine.createSpyObj<KeycloakService>('KeycloakService', ['isLoggedIn', 'getToken']);
 
   beforeEach(() => {
-    keycloakServiceMock = jasmine.createSpyObj<KeycloakService>('KeycloakService', ['isLoggedIn', 'getToken']);
-
     TestBed.configureTestingModule({
       providers: [
         provideHttpClient(withInterceptors([authInterceptor])),
@@ -29,10 +27,10 @@ describe('AuthInterceptor', () => {
     httpMock.verify();
   });
 
-  it('should pass the request through without modifying it if user is not logged in', () => {
+  it('should pass the request through without modifying it if user is not logged in', async () => {
     keycloakServiceMock.isLoggedIn.and.returnValue(false);
 
-    httpClient.get('/test-endpoint').subscribe();
+    await httpClient.get('/test-endpoint').subscribe();
 
     const req = httpMock.expectOne('/test-endpoint');
     expect(req.request.headers.has('Authorization')).toBeFalse();

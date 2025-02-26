@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { environment } from '../../environments/environment';
@@ -10,12 +10,16 @@ import { environment } from '../../environments/environment';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
   private keycloakService = inject(KeycloakService);
+
+  ngOnInit(): void {
+    this.isLoggedIn.update(() => this.keycloakService.isLoggedIn());
+  }
   
   isNavbarOpen = signal(false);
-  isLoggedIn = signal(this.keycloakService.isLoggedIn());
+  isLoggedIn = signal(false);
 
   toggleNavbar() {
     this.isNavbarOpen.update(isOpen => !isOpen);
